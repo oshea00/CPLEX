@@ -3,7 +3,7 @@
 CPLEX is a convex optimization toolkit for solving a wide variety of problems. 
 
 Convex optimization is a more general approach to solving mathematical optimization problems that encompasses classic linear 
-programming, systems of equations, and least-squares techniques. A very good reference on the subject can be found 
+programming, systems of equations, and least-squares techniques, along with quadratic linear/non-linear techniques. A very good reference on the subject can be found 
 in [Convex Optimization – Boyd and Vandenberghe](https://web.stanford.edu/~boyd/cvxbook/) for those who
 are interested in the subject. It contains a good balance of theory and practical applications,
 along with algorithmic descriptions.
