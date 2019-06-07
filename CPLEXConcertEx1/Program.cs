@@ -74,11 +74,16 @@ namespace CPLEXConcertEx1
                 // Solve and print results
                 if (cplex.Solve())
                 {
+                    var w = new double[weights.Length];
                     Console.WriteLine("\nResulting Weights:");
                     for (int i = 0; i < weights.Length; i++)
                     {
                         Console.WriteLine($"{i + 1} : {cplex.GetValue(weights[i]) * 100:0.0}%");
+                        w[i] = cplex.GetValue(weights[i]);
                     }
+                    var totReturn = WeightedReturn(w, expReturns);
+                    var totVariance = PortfolioVariance(w, covmat);
+                    Console.WriteLine($"Total Return: {totReturn:0.00}, Total Variance: {totVariance:0.0000}");
                 }
 
                 cplex.End();
@@ -90,6 +95,24 @@ namespace CPLEXConcertEx1
 
             Console.WriteLine("Press any key to quit.");
             Console.ReadKey();
+        }
+
+        static double WeightedReturn(double[] weights, double[] returns)
+        {
+            return Enumerable.Zip(weights, returns, (wt, e) => wt * e).Sum();
+        }
+
+        static double PortfolioVariance(double[] weights, double[][] cov)
+        {
+            double variance =0 ;
+            for (int i = 0; i < cov.Length; ++i)
+            {
+                for (int j = 0; j < cov.Length; ++j)
+                {
+                    variance += (cov[i][j] * weights[i] * weights[j]);
+                }
+            }
+            return variance;
         }
 
         static double Covariance(double[] x, double[] y)
