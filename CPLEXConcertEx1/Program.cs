@@ -49,17 +49,18 @@ namespace CPLEXConcertEx1
 
                 // Portfolio variance : xᵀ∑x (matrix form of bi-linear: ∑ᵢ∑ⱼ x[i]*x[j]*cov(i,j)
                 // where ∑ is the covariance matrix m*m of m assets.
-                var q = cplex.QuadNumExpr();
+                var pvar = cplex.QuadNumExpr();
                 for (int i = 0; i < assets.Length; ++i)
                 {
                     for (int j = 0; j < assets.Length; ++j)
                     {
-                        q.AddTerm(covmat[i][j], weights[i], weights[j]);
+                        pvar.AddTerm(covmat[i][j], weights[i], weights[j]);
                     }
                 }
 
-                // Objective: maximize  variance - (Rho/2) * portfolio return
-                var obj = cplex.Diff(expRet, cplex.Prod(rho / 2, q));
+                // Objective (maximize): portfolio return  - (Rho/2) * portfolio variance.
+                // Where 0 <= Rho <= 1 is the desired risk tolerance. 
+                var obj = cplex.Diff(expRet, cplex.Prod(rho / 2, pvar));
 
                 cplex.AddMaximize(obj);
 
