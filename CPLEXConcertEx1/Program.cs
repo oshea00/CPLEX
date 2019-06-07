@@ -30,7 +30,7 @@ namespace CPLEXConcertEx1
             // Pre-process data
             var covmat = CovarianceMatrix(prices);
             DisplayCovariance(covmat);
-            var expReturns = ExpReturn(prices);
+            var expReturns = AssetReturns(prices);
             DisplayReturns(assets, expReturns);
             var rho = 0.05;
 
@@ -141,17 +141,17 @@ namespace CPLEXConcertEx1
             return cov;
         }
 
-        static double[] ExpReturn(double[][] prices)
+        static double[] AssetReturns(double[][] prices)
         {
             var exp = new double[prices.Length];
             for (int i = 0; i < prices.Length; i++)
             {
-                exp[i] = annualizedReturn(prices[i]);
+                exp[i] = AnnualizedReturn(prices[i]);
             }
             return exp;
         }
 
-        static double annualizedReturn(double[] dailyPrices)
+        static double AnnualizedReturn(double[] dailyPrices)
         {
             var dailyReturn = new double[dailyPrices.Length - 1];
             for (int i = 0; i < dailyPrices.Length - 1; i++)
@@ -162,23 +162,6 @@ namespace CPLEXConcertEx1
             var avgAnnual = Pow(Pow(1.0 + dailyReturn.Average(), 250.0), 1.0 / 250) - 1;
 
             return avgAnnual;
-        }
-
-        static double Variance(double[][] prices, double[] weights)
-        {
-            // Each row in prices represents prices for an asset - m rows for m assets
-            // Covariance will be m * m matrix
-            var m = prices.Length;
-            double variance = 0;
-            var cov = new double[m, m];
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    variance += Covariance(prices[i], prices[j]) * weights[i] * weights[j];
-                }
-            }
-            return variance;
         }
 
         static void DisplayCovariance(double[][] cov)
