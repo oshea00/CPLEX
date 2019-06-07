@@ -65,7 +65,7 @@ namespace CPLEXConcertEx1
                 cplex.AddMaximize(obj);
 
                 // Subject to:
-                // Sum of weights = 1.0
+                // Sum of weights <= 1.0
                 cplex.AddEq(cplex.Sum(weights), 1.0);
 
                 // Exports model definition to readable LP format
