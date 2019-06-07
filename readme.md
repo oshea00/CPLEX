@@ -4,9 +4,9 @@ CPLEX is a convex optimization toolkit for solving a wide variety of problems.
 
 Convex optimization is a more general approach to solving mathematical optimization problems that encompasses classic linear 
 programming, systems of equations, and least-squares techniques, along with quadratic linear/non-linear techniques. A very good reference on the subject can be found 
-in [Convex Optimization – Boyd and Vandenberghe](https://web.stanford.edu/~boyd/cvxbook/) for those who
-are interested in the subject. It contains a good balance of theory and practical applications,
-along with algorithmic descriptions.
+in [Convex Optimization – Boyd and Vandenberghe](https://web.stanford.edu/~boyd/cvxbook/). For those who
+are interested in the subject, it contains a good balance of theory and practical applications
+along with useful algorithmic descriptions.
 
 The goal of this example program is to demonstrate how the API for CPLEX is used to setup 
 an optimization problem and solve it. CPLEX refers to this API as "Concert." CPLEX has its own language (OPL) for expressing
