@@ -11,7 +11,7 @@ along with algorithmic descriptions.
 The goal of this example program is to demonstrate how the API for CPLEX is used to setup 
 an optimization problem and solve it. CPLEX refers to this API as "Concert." CPLEX has its own language (OPL) for expressing
 problems and allowing to them be run in the CPLEX environment, along with a Javascript-like
-procedural language (ILOG) to manage pre/post data processing and control flow However, for cases
+procedural language (ILOG) to manage pre/post data processing and control flow. However, for cases
 where a model must be integrated into other applications, the CPLEX API is available for,
 C/C++, Python, and .Net shops to take advantage of.
 
